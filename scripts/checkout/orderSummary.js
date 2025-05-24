@@ -1,8 +1,8 @@
 import { cart,removeItemFromCart,UpdatedeliveryOption } from "../../data/cart.js";
-import {products} from '../../data/products.js'
+import {products,getproduct} from '../../data/products.js'
 import { format_currency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { deliveryOptions,getdeliveryoption } from "../../data/deliveryOptions.js";
 
 const today = dayjs();
 const deliveryDate = today.add(7,'days');
@@ -13,17 +13,9 @@ export function rendorOrderSummary()
     let checkoutproductsHtml = '';
     cart.forEach((item) => {
         const productId = item.productId;
-        let matchedproduct;
-        products.forEach((product) => {
-            if(productId === product.id)
-                matchedproduct = product;
-        });
+        const matchedproduct = getproduct(productId);
         const deliveryOptionid = item.deliveryOptionsId;
-        let deliveryOption;
-        deliveryOptions.forEach((option) => {
-            if(option.id === deliveryOptionid)
-                deliveryOption = option;
-        });
+        const deliveryOption = getdeliveryoption(deliveryOptionid);
         const today = dayjs();
         const deliveryDate = today.add(deliveryOption.deliverydays,'days');
         const dateString = deliveryDate.format('dddd, MMMM D')
@@ -74,7 +66,7 @@ export function rendorOrderSummary()
             const today = dayjs();
             const deliveryDate = today.add(deliveryOption.deliverydays,'days');
             const dateString = deliveryDate.format('dddd, MMMM D')
-            const priceString = (deliveryOption.priceCents)?"FREE": `$${format_currency(deliveryOption.priceCents)} -`
+            const priceString = (deliveryOption.priceCents == 0)?"FREE": `$${format_currency(deliveryOption.priceCents)} -`
             const ischecked = deliveryOption.id === item.deliveryOptionsId;
             html+=`
                 <div class="delivery-option js-delivery-option"
