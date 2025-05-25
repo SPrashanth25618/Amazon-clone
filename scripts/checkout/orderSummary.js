@@ -17,7 +17,7 @@ export function rendorOrderSummary()
         const deliveryDate = today.add(deliveryOption.deliverydays,'days');
         const dateString = deliveryDate.format('dddd, MMMM D')
         checkoutproductsHtml += `
-            <div class="cart-item-container js-cart-item-container-${matchedproduct.id}">
+            <div class="cart-item-container js-cart-item-container js-cart-item-container-${matchedproduct.id}">
             <div class="delivery-date">
                 Delivery date: ${dateString}
             </div>
@@ -33,14 +33,14 @@ export function rendorOrderSummary()
                 <div class="product-price">
                     $${format_currency(matchedproduct.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity js-product-quantity-${matchedproduct.id}">
                     <span>
                     Quantity: <span class="quantity-label">${item.quantity}</span>
                     </span>
                     <span class="update-quantity-link link-primary">
                     Update
                     </span>
-                    <span class="delete-quantity-link link-primary js-deleteLink" data-product-id = "${matchedproduct.id}">
+                    <span class="delete-quantity-link link-primary js-deleteLink js-deleteLink-${matchedproduct.id}" data-product-id = "${matchedproduct.id}">
                     Delete
                     </span>
                 </div>
