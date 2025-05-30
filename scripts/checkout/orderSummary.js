@@ -31,7 +31,7 @@ export function rendorOrderSummary()
                     ${matchedproduct.name}
                 </div>
                 <div class="product-price">
-                    $${format_currency(matchedproduct.priceCents)}
+                    ${matchedproduct.getPrice()}
                 </div>
                 <div class="product-quantity js-product-quantity-${matchedproduct.id}">
                     <span>
