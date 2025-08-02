@@ -6,6 +6,13 @@ import { loadCart } from "../data/cart.js";
 // import '../data/cart-class.js';
 // import '../data/backend-practice.js';
 
+async function loadPage(){
+    console.log('Load Page');
+}
+loadPage().then(() => {
+    console.log('Next Step');
+});
+
 Promise.all([
     loadProductsFetch(),
     new Promise((resolve) => {
